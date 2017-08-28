@@ -1,3 +1,7 @@
+## 2.1 2017-08-28 <daveconroy@selfdesign.org>
+
+* File Organization
+
 ## 2.0 2017-07-18 <daveconroy@selfdesign.org>
 
 * Rebase with s6

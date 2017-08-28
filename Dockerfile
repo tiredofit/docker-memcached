@@ -2,8 +2,9 @@ FROM tiredofit/alpine:3.5
 MAINTAINER Dave Conroy <dave at tiredofit dot ca>
 
 ## Set Environment Variables
-	ENV MEMCACHED_VERSION 1.4.36
-	ENV MEMCACHED_SHA1 519b417515206b0b95ff9bf14106a891f6a2252e
+	ARG MEMCACHED_VERSION=1.4.36
+	ARG MEMCACHED_SHA1=519b417515206b0b95ff9bf14106a891f6a2252e
+    ENV ZABBIX_HOSTNAME=memcached-app
 
 ## Install
 # add our user and group first to make sure their IDs get assigned consistently, regardless of whatever dependencies get added
@@ -52,13 +53,9 @@ MAINTAINER Dave Conroy <dave at tiredofit dot ca>
         rm -rf /var/cache/apk/*	&& \
 		memcached -V
 
-## Zabbix Setup 
-	ENV ZABBIX_HOSTNAME=memcached-app
-	ADD /install/zabbix  /etc/zabbix
-	RUN chmod +x /etc/zabbix/zabbix_agentd.conf.d/*.py
-
-### S6 Setup
-    ADD install/s6 /etc/s6
+   
+### Add Folders
+    ADD /install /
 
 ## Networking Setup
 	EXPOSE 11211
