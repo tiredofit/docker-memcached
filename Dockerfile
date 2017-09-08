@@ -1,5 +1,5 @@
 FROM tiredofit/alpine:3.5
-MAINTAINER Dave Conroy <dave at tiredofit dot ca>
+LABEL maintainer="Dave Conroy (dave at tiredofit dot ca)"
 
 ## Set Environment Variables
 	ARG MEMCACHED_VERSION=1.4.36
