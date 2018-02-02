@@ -1,10 +1,10 @@
-FROM tiredofit/alpine:3.5
+FROM tiredofit/alpine:3.7
 LABEL maintainer="Dave Conroy (dave at tiredofit dot ca)"
 
 ## Set Environment Variables
-	ARG MEMCACHED_VERSION=1.4.36
-	ARG MEMCACHED_SHA1=519b417515206b0b95ff9bf14106a891f6a2252e
-    ENV ZABBIX_HOSTNAME=memcached-app
+	ARG MEMCACHED_VERSION=1.5.4
+	ARG MEMCACHED_SHA1=29cb75cc234dbaceed6e89db029af8363706f0fe
+        ENV ZABBIX_HOSTNAME=memcached-app
 
 ## Install
 # add our user and group first to make sure their IDs get assigned consistently, regardless of whatever dependencies get added
@@ -29,6 +29,7 @@ LABEL maintainer="Dave Conroy (dave at tiredofit dot ca)"
             apk add --no-cache \
                 python \
                 && \
+
 		wget -O memcached.tar.gz "https://memcached.org/files/memcached-$MEMCACHED_VERSION.tar.gz" && \
 		echo "$MEMCACHED_SHA1  memcached.tar.gz" | sha1sum -c - && \
 		mkdir -p /usr/src/memcached && \
@@ -50,7 +51,7 @@ LABEL maintainer="Dave Conroy (dave at tiredofit dot ca)"
 		)" && \
 		apk add --virtual .memcached-rundeps $runDeps && \
 		apk del .build-deps && \
-        rm -rf /var/cache/apk/*	&& \
+                rm -rf /var/cache/apk/*	&& \
 		memcached -V
 
    
@@ -59,7 +60,4 @@ LABEL maintainer="Dave Conroy (dave at tiredofit dot ca)"
 
 ## Networking Setup
 	EXPOSE 11211
-
-## Entrypoint Configuration
-    ENTRYPOINT ["/init"]
 

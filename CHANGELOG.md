@@ -1,3 +1,9 @@
+## 2.2 2018-01-31 <daveconroy@selfdesign.org>
+
+* Bump to 1.5.4
+* Alpine 3.7
+* Fix Zabbix Checks
+
 ## 2.1 2017-08-28 <daveconroy@selfdesign.org>
 
 * File Organization
