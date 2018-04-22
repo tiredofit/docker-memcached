@@ -8,9 +8,9 @@ LABEL maintainer="Dave Conroy (dave at tiredofit dot ca)"
 
 ## Install
 # add our user and group first to make sure their IDs get assigned consistently, regardless of whatever dependencies get added
-	RUN adduser -D memcache && \
+	RUN adduser -D memcache ; \
 
-	    set -x && \
+	    set -x ; \
 		apk add --no-cache --virtual .build-deps \
 			ca-certificates \
 			coreutils \
@@ -24,34 +24,34 @@ LABEL maintainer="Dave Conroy (dave at tiredofit dot ca)"
 			make \
 			perl \
 			tar \
-	        && \
+	        ; \
                
             apk add --no-cache \
                 python \
-                && \
+                ; \
 
-		wget -O memcached.tar.gz "https://memcached.org/files/memcached-$MEMCACHED_VERSION.tar.gz" && \
-		echo "$MEMCACHED_SHA1  memcached.tar.gz" | sha1sum -c - && \
-		mkdir -p /usr/src/memcached && \
-		tar -xzf memcached.tar.gz -C /usr/src/memcached --strip-components=1 && \
-		rm memcached.tar.gz && \
-		cd /usr/src/memcached && \
+		wget -O memcached.tar.gz "https://memcached.org/files/memcached-$MEMCACHED_VERSION.tar.gz" ; \
+		echo "$MEMCACHED_SHA1  memcached.tar.gz" | sha1sum -c - ; \
+		mkdir -p /usr/src/memcached ; \
+		tar -xzf memcached.tar.gz -C /usr/src/memcached --strip-components=1 ; \
+		rm memcached.tar.gz ; \
+		cd /usr/src/memcached ; \
 		./configure \
 			--build="$(dpkg-architecture --query DEB_BUILD_GNU_TYPE)" \
-			--enable-sasl && \
-		make -j "$(nproc)" && \
-		make install && \
-		cd / && rm -rf /usr/src/memcached && \
+			--enable-sasl ; \
+		make -j "$(nproc)" ; \
+		make install ; \
+		cd / && rm -rf /usr/src/memcached ; \
 		runDeps="$( \
 			scanelf --needed --nobanner --recursive /usr/local \
 				| awk '{ gsub(/,/, "\nso:", $2); print "so:" $2 }' \
 				| sort -u \
 				| xargs -r apk info --installed \
 				| sort -u \
-		)" && \
-		apk add --virtual .memcached-rundeps $runDeps && \
-		apk del .build-deps && \
-                rm -rf /var/cache/apk/*	&& \
+		)" ; \
+		apk add --virtual .memcached-rundeps $runDeps ; \
+		apk del .build-deps ; \
+                rm -rf /var/cache/apk/*	; \
 		memcached -V
 
    
