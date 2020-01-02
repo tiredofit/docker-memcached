@@ -1,12 +1,10 @@
 #!/usr/bin/with-contenv bash
 
-source /assets/functions/*
+for s in /assets/functions/*; do source $s; done
 PROCESS_NAME="memcached"
 
-while [ ! -f /tmp/state/99-container-init ]
-do
-  sleep 1
-done
+check_container_initialized
+liftoff
 
 # first arg is `-f` or `--some-option`
 if [ "${1#-}" != "$1" ]; then
@@ -17,4 +15,3 @@ liftoff
 
 print info "Startint Memcached ${MEMCACHED_VERSION}"
 exec s6-setuidgid memcache memcached
-
