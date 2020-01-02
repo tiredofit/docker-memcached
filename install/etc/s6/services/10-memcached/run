@@ -13,5 +13,5 @@ fi
 
 liftoff
 
-print info "Startint Memcached ${MEMCACHED_VERSION}"
+print_info "Starting Memcached ${MEMCACHED_VERSION}"
 exec s6-setuidgid memcache memcached
