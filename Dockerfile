@@ -2,8 +2,8 @@ FROM tiredofit/alpine:3.11
 LABEL maintainer="Dave Conroy (dave at tiredofit dot ca)"
 
 ## Set Environment Variables
-ARG MEMCACHED_VERSION=1.5.12
-ARG MEMCACHED_SHA1=f67096ba64b0c47668bcad5b680010c4f8987d4c
+ARG MEMCACHED_VERSION=1.6.0
+ARG MEMCACHED_SHA1=fe6ac14e6e98d4b7ff8293cea359b21342bc9c68
 ENV ZABBIX_HOSTNAME=memcached-app
 
 ## Install
