@@ -1,47 +1,48 @@
-FROM tiredofit/alpine:3.11
-LABEL maintainer="Dave Conroy (dave at tiredofit dot ca)"
+FROM tiredofit/alpine:3.14
+LABEL maintainer="Dave Conroy (github.com/tiredofit)"
 
 ## Set Environment Variables
-ARG MEMCACHED_VERSION=1.6.0
-ARG MEMCACHED_SHA1=fe6ac14e6e98d4b7ff8293cea359b21342bc9c68
-ENV ZABBIX_HOSTNAME=memcached-app
+ENV MEMCACHED_VERSION=1.6.10 \
+    ZABBIX_HOSTNAME=memcached-app
 
-## Install
-# add our user and group first to make sure their IDs get assigned consistently, regardless of whatever dependencies get added
-RUN adduser -D memcache && \
-    \
-    set -x && \
+RUN set -x && \
+	addgroup -S -g 11211 memcached && \
+    adduser -S -D -H -u 11211 -G memcached -g "Memcached" memcached && \
 	apk add -t .memcached-build-deps \
+				autoconf \
+				automake \
 				ca-certificates \
 				coreutils \
 				cyrus-sasl-dev \
 				dpkg-dev dpkg \
 				gcc \
+				git \
 				libc-dev \
 				libevent-dev \
-				openssl \
+				libseccomp-dev \
 				linux-headers \
 				make \
+				musl-dev \
+				openssl \
 				perl \
+				perl-test-harness-utils \
 				tar \
 		        && \
     \
-    apk add --no-cache \
-            python \
-            && \
+#    apk add .memcached-run-deps \
+#            python \
+#            && \
     \
-	wget -O memcached.tar.gz "https://memcached.org/files/memcached-$MEMCACHED_VERSION.tar.gz" && \
-	echo "$MEMCACHED_SHA1  memcached.tar.gz" | sha1sum -c - && \
-	mkdir -p /usr/src/memcached && \
-	tar -xzf memcached.tar.gz -C /usr/src/memcached --strip-components=1 && \
-	rm memcached.tar.gz && \
+	git clone https://github.com/memcached/memcached /usr/src/memcached && \
 	cd /usr/src/memcached && \
+	git -C /usr/src/memcached checkout ${MEMCACHED_VERSION} && \
+	./autogen.sh && \
 	./configure \
 		--build="$(dpkg-architecture --query DEB_BUILD_GNU_TYPE)" \
 		--enable-sasl && \
 	make -j "$(nproc)" && \
 	make install && \
-	cd / && rm -rf /usr/src/memcached && \
+	cd / && \
 	runDeps="$( \
 		scanelf --needed --nobanner --recursive /usr/local \
 			| awk '{ gsub(/,/, "\nso:", $2); print "so:" $2 }' \
@@ -51,11 +52,12 @@ RUN adduser -D memcache && \
 	)" && \
 	apk add --virtual .memcached-rundeps $runDeps && \
 	apk del .memcached-build-deps && \
-        rm -rf /var/cache/apk/*	&& \
+    rm -rf /var/cache/apk/*	&& \
+	rm -rf /usr/src/memcached && \
 	memcached -V
 
 ### Add Folders
-ADD /install /
+ADD install/ /
 
 ## Networking Setup
 EXPOSE 11211
