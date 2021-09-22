@@ -1,9 +1,9 @@
-FROM tiredofit/alpine:3.14
+FROM docker.io/tiredofit/alpine:3.14
 LABEL maintainer="Dave Conroy (github.com/tiredofit)"
 
 ## Set Environment Variables
 ENV MEMCACHED_VERSION=1.6.10 \
-    ZABBIX_HOSTNAME=memcached-app
+    CONTAINER_NAME=memcached-app
 
 RUN set -x && \
 	addgroup -S -g 11211 memcached && \

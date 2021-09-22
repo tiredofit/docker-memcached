@@ -5,7 +5,7 @@ services:
     image: tiredofit/memcached
     container_name: memcached-app
     environment: 
-      - ZABBIX_HOSTNAME=memcached-app
+      - CONTAINER_NAME=memcached-app
     networks:
     - internal
     - services

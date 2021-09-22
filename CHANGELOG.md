@@ -1,3 +1,9 @@
+## 2.5.1 2021-09-22 <dave at tiredofit dot ca>
+
+   ### Changed
+      - Update Dockerfile with docker.io prefix
+
+
 ## 2.5.0 2021-08-17 <dave at tiredofit dot ca>
 
    ### Added
