@@ -1,3 +1,9 @@
+## 2.5.2 2021-11-09 <dave at tiredofit dot ca>
+
+   ### Added
+      - Memcached 1.6.12
+
+
 ## 2.5.1 2021-09-22 <dave at tiredofit dot ca>
 
    ### Changed
