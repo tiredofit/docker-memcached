@@ -11,6 +11,14 @@ if [ "${1#-}" != "$1" ]; then
 	set -- memcached "$@"
 fi
 
+if var_true "${CONTAINER_ENABLE_MONITORING}" && [ "${CONTAINER_MONITORING_BACKEND,,}" = "zabbix" ]; then
+	source /assets/defaults/03-monitoring
+	cat <<EOF > "${ZABBIX_CONFIG_PATH}"/"${ZABBIX_CONFIG_FILE}.d"/tiredofit_memcached.conf
+# Zabbix memcached Configuration - Automatically Generated
+# Find Companion Zabbix Server Templates at https://github.com/tiredofit/docker-memcached
+# Autoregister=unbound
+EOF
+fi
 liftoff
 
 print_start "Starting Memcached ${MEMCACHED_VERSION}"
