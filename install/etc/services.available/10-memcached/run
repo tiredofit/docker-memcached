@@ -16,7 +16,7 @@ if var_true "${CONTAINER_ENABLE_MONITORING}" && [ "${CONTAINER_MONITORING_BACKEN
 	cat <<EOF > "${ZABBIX_CONFIG_PATH}"/"${ZABBIX_CONFIG_FILE}.d"/tiredofit_memcached.conf
 # Zabbix memcached Configuration - Automatically Generated
 # Find Companion Zabbix Server Templates at https://github.com/tiredofit/docker-memcached
-# Autoregister=unbound
+# Autoregister=memcached
 EOF
 fi
 liftoff

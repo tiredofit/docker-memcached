@@ -1,3 +1,9 @@
+## 2.5.7 2021-12-15 <dave at tiredofit dot ca>
+
+   ### Changed
+      - Fix for 2.5.5 and 2.5.6
+
+
 ## 2.5.6 2021-12-15 <dave at tiredofit dot ca>
 
    ### Changed
