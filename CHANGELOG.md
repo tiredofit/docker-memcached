@@ -1,3 +1,9 @@
+## 2.5.6 2021-12-15 <dave at tiredofit dot ca>
+
+   ### Changed
+      - Patchup to 2.5.5
+
+
 ## 2.5.5 2021-12-07 <dave at tiredofit dot ca>
 
    ### Added
