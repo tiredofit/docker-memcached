@@ -3,7 +3,8 @@ LABEL maintainer="Dave Conroy (github.com/tiredofit)"
 
 ## Set Environment Variables
 ENV MEMCACHED_VERSION=1.6.12 \
-    CONTAINER_NAME=memcached-app
+    IMAGE_NAME="tiredofit/memcached" \
+    IMAGE_REPO_URL="https://github.com/tiredofit/docker-memcached/"
 
 RUN set -x && \
     addgroup -S -g 11211 memcached && \
