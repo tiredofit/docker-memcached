@@ -2,11 +2,12 @@ FROM docker.io/tiredofit/alpine:3.16
 LABEL maintainer="Dave Conroy (github.com/tiredofit)"
 
 ## Set Environment Variables
-ENV MEMCACHED_VERSION=1.6.15 \
+ENV MEMCACHED_VERSION=1.6.17 \
     IMAGE_NAME="tiredofit/memcached" \
     IMAGE_REPO_URL="https://github.com/tiredofit/docker-memcached/"
 
-RUN set -x && \
+RUN source /assts/funtions/00-container && \
+    set -x && \
     addgroup -S -g 11211 memcached && \
     adduser -S -D -H -u 11211 -G memcached -g "Memcached" memcached && \
     apk add -t .memcached-build-deps \
@@ -31,10 +32,8 @@ RUN set -x && \
                 perl-utils \
                 && \
     \
-    git clone https://github.com/memcached/memcached /usr/src/memcached && \
-    cd /usr/src/memcached && \
-    git -C /usr/src/memcached checkout ${MEMCACHED_VERSION} && \
-    sed -i "/#include <sys\/cdefs.h>/d" /usr/src/memcached/queue.h && \
+    clone_git_repo https://github.com/memcached/memcached ${MEMCACHED_VERSION} && \
+    sed -i "/#include <sys\/cdefs.h>/d" ./queue.h && \
     ./autogen.sh && \
     ./configure \
         --build="$(gnuArch)" \

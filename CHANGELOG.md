@@ -1,3 +1,12 @@
+## 2.5.11 2022-10-04 <dave at tiredofit dot ca>
+
+   ### Added
+      - Memcached 1.6.17
+
+   ### Changed
+      - Change the way git repos are cloned in Dockerfile
+
+
 ## 2.5.10 2022-05-24 <dave at tiredofit dot ca>
 
    ### Added
