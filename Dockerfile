@@ -6,7 +6,7 @@ ENV MEMCACHED_VERSION=1.6.17 \
     IMAGE_NAME="tiredofit/memcached" \
     IMAGE_REPO_URL="https://github.com/tiredofit/docker-memcached/"
 
-RUN source /assets/funtions/00-container && \
+RUN source /assets/functions/00-container && \
     set -x && \
     addgroup -S -g 11211 memcached && \
     adduser -S -D -H -u 11211 -G memcached -g "Memcached" memcached && \

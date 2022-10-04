@@ -1,3 +1,9 @@
+## 2.5.13 2022-10-04 <dave at tiredofit dot ca>
+
+   ### Changed
+      - Fix another spelling mistake in Dockerfile
+
+
 ## 2.5.12 2022-10-04 <dave at tiredofit dot ca>
 
    ### Changed
