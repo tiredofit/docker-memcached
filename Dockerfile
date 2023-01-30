@@ -63,4 +63,4 @@ RUN source /assets/functions/00-container && \
 EXPOSE 11211
 
 ### Add Folders
-ADD install/ /
+COPY install/ /
