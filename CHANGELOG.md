@@ -1,3 +1,10 @@
+## 2.5.14 2023-10-16 <dave at tiredofit dot ca>
+
+   ### Added
+      - Alpine 3.18 base
+      - Memcached 1.6.22
+
+
 ## 2.5.13 2022-10-04 <dave at tiredofit dot ca>
 
    ### Changed
