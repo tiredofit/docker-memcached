@@ -1,3 +1,9 @@
+## 2.5.18 2024-05-31 <dave at tiredofit dot ca>
+
+   ### Added
+      - Memcached 1.6.28
+
+
 ## 2.5.17 2024-05-06 <dave at tiredofit dot ca>
 
    ### Added

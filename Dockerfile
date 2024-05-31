@@ -2,7 +2,7 @@ FROM docker.io/tiredofit/alpine:3.18
 LABEL maintainer="Dave Conroy (github.com/tiredofit)"
 
 ## Set Environment Variables
-ENV MEMCACHED_VERSION=1.6.27 \
+ENV MEMCACHED_VERSION=1.6.28 \
     IMAGE_NAME="tiredofit/memcached" \
     IMAGE_REPO_URL="https://github.com/tiredofit/docker-memcached/"
 
