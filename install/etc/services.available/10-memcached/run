@@ -2,7 +2,7 @@
 
 source /assets/functions/00-container
 prepare_service 03-monitoring
-PROCESS_NAME="memcached"
+SERVICE_NAME="memcached"
 
 check_container_initialized
 liftoff
